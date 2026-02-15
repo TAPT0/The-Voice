@@ -1,10 +1,12 @@
 extends CharacterBody3D
 
+#animation
+@onready var anim_player=$warden/AnimationPlayer
 #tell the warden who to chase
 @onready var player_path:NodePath
 var player_node
 
-const SPEED = 30.0
+const SPEED = 20.0
 
 func _ready():
 	#find the player in the world
@@ -41,7 +43,6 @@ func _physics_process(delta):
 		elif distance<3.0:
 			is_hunting=true
 		#look at the player
-		print("Light:",player_light.light_energy,"|Dist:",distance,"|See:",can_see_player)
 		if is_hunting:
 			look_at(player_node.global_position,Vector3.UP)
 			rotation.x=0
@@ -49,8 +50,14 @@ func _physics_process(delta):
 			
 			#move to player
 			velocity=transform.basis.z*-SPEED
+			#animation run
+			if anim_player.current_animation !="mixamo_com":
+				anim_player.play("mixamo_com,")
 		else:
 			velocity=Vector3.ZERO
+			#animation idle
+			if anim_player.current_animation !="Take 001":
+				anim_player.play("Take 001,")
 		move_and_slide()
 
 func _on_area_3d_body_entered(body):

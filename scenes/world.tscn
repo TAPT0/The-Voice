@@ -1,78 +1,60 @@
 [gd_scene format=3 uid="uid://y5xvjqg6ov64"]
 
+[ext_resource type="Material" uid="uid://lprgjy5vs6vh" path="res://assets/floor/Bark006_2K-JPG.tres" id="1_4wyf3"]
 [ext_resource type="PackedScene" uid="uid://bfnca7rpcg0rk" path="res://scenes/player.tscn" id="1_nnsk1"]
 [ext_resource type="PackedScene" uid="uid://ba4b0lv37htva" path="res://scenes/warden.tscn" id="2_rwgxs"]
-[ext_resource type="PackedScene" uid="uid://d1bs5qhp1wn50" path="res://spooky_hallway_-_blender_cycles_bake.glb" id="3_4wyf3"]
+[ext_resource type="Material" uid="uid://bjvyruhui8cj7" path="res://assets/wall/Bricks097_2K-JPG.tres" id="4_71j4m"]
+[ext_resource type="Material" uid="uid://cs1iu71lygyx0" path="res://assets/celling/Concrete042C_2K-JPG.tres" id="5_qfnet"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_4wyf3"]
-size = Vector3(11.942001, 1, 2.5671387)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_k0juu"]
-size = Vector3(1.6314087, 0.6151123, 5.6078568)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_71j4m"]
-size = Vector3(4.592041, 0.52819824, 1.2889404)
-
-[sub_resource type="Environment" id="Environment_e5uuo"]
+[sub_resource type="Environment" id="Environment_rwgxs"]
 background_mode = 1
 ambient_light_source = 1
 
 [node name="CSGBox3D" type="CSGBox3D" unique_id=2089314282]
 use_collision = true
 size = Vector3(4, 1, 40)
+material = ExtResource("1_4wyf3")
 
 [node name="Player" parent="." unique_id=1082263877 instance=ExtResource("1_nnsk1")]
-transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 71.40307, 5.075842, -54.958496)
+transform = Transform3D(0.009895835, 0, 0.99995106, 0, 1, 0, -0.99995106, 0, 0.009895835, 35.351475, 0.6901547, -21.91857)
 
 [node name="Warden" parent="." unique_id=466530888 instance=ExtResource("2_rwgxs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.1234884, 3.7416406, -83.432205)
+transform = Transform3D(-0.9991089, 0, -0.04220701, 0, 1, 0, 0.04220701, 0, -0.9991089, -0.1712122, 1.3526752, 17.605728)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=2022923728]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3645654, 2.4982486, 0)
-size = Vector3(1, 4, 40)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3645654, 2.1415591, -2.3479004)
+size = Vector3(1, 4.713379, 44.6958)
+material = ExtResource("4_71j4m")
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="." unique_id=816453462]
-transform = Transform3D(1.9106855e-15, 4.371139e-08, 1, 1, -4.371139e-08, 0, 4.371139e-08, 1, -4.371139e-08, 18.033298, -0.032842636, -21.88026)
-size = Vector3(1, 4, 40)
+transform = Transform3D(1.9106855e-15, 4.371139e-08, 1, 1, -4.371139e-08, 0, 4.371139e-08, 1, -4.371139e-08, 18.033298, 0.018269526, -21.5677)
+size = Vector3(1, 4.625122, 40)
+material = ExtResource("1_4wyf3")
 
 [node name="CSGBox3D5" type="CSGBox3D" parent="." unique_id=1043499131]
 transform = Transform3D(1.9106855e-15, 4.371139e-08, 1, 1, -4.371139e-08, 0, 4.371139e-08, 1, -4.371139e-08, 18.033298, 3.9177456, -21.88026)
 size = Vector3(1, 4, 40)
+material = ExtResource("5_qfnet")
 
 [node name="CSGBox3D6" type="CSGBox3D" parent="." unique_id=139511989]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 18.033298, 2.4186382, -24.260006)
 size = Vector3(1, 4, 40)
+material = ExtResource("4_71j4m")
 
 [node name="CSGBox3D7" type="CSGBox3D" parent="." unique_id=72547450]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 20.50449, 2.4186382, -19.498154)
-size = Vector3(1, 4, 35.057617)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 20.170506, 2.4186382, -19.498154)
+size = Vector3(1, 4, 35.725586)
+material = ExtResource("4_71j4m")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=139030916]
 transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 2.4082174, 2.4982486, 0)
 size = Vector3(1, 4, 40)
+material = ExtResource("4_71j4m")
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=1923209043]
-transform = Transform3D(-4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, 0, 0, 0, 1, 0.20413911, 3.9934535, 0)
-size = Vector3(1, 4, 40)
+transform = Transform3D(-4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, 0, 0, 0, 1, 0.014197722, 3.9228854, 0)
+size = Vector3(1, 4.379883, 40)
+material = ExtResource("5_qfnet")
 
-[node name="Sketchfab_Scene" parent="." unique_id=501481741 instance=ExtResource("3_4wyf3")]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 47.802, 0, -54.631)
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Sketchfab_Scene" unique_id=773867523]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Sketchfab_Scene/StaticBody3D" unique_id=1670924718]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.021354675, -0.4635252, -0.00012207031)
-shape = SubResource("BoxShape3D_4wyf3")
-
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="Sketchfab_Scene/StaticBody3D" unique_id=226815388]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1540837, -0.28469926, -3.8939877)
-shape = SubResource("BoxShape3D_k0juu")
-
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="Sketchfab_Scene/StaticBody3D" unique_id=843547786]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.6105685, -0.23590088, -6.0466223)
-shape = SubResource("BoxShape3D_71j4m")
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Sketchfab_Scene" unique_id=892503922]
-environment = SubResource("Environment_e5uuo")
-
-[editable path="Sketchfab_Scene"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1926046546]
+environment = SubResource("Environment_rwgxs")
