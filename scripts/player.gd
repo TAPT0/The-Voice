@@ -1,5 +1,9 @@
 extends CharacterBody3D
 
+#panic system
+var warden_node
+const PANIC_DISTANCE=10.0
+var can_hear=false
 #tweaks
 const THRESHOLD_WHISPER=-50.0
 const THRESHOLD_TALK =-30.0
@@ -19,8 +23,20 @@ const COLOR_FLARE=Color(1.0,1.0,1.0)
 
 var gravity =ProjectSettings.get_setting("physics/3d/default_gravity")
 var time_passed=0.0 #flicker
+
+#sanity bar
+var sanity=100.0
+const SANITY_DRAIN_SPEED=10.0
+const SANITY_HEAL_SPEED=20.0
 func _ready():
 	Input.mouse_mode=Input.MOUSE_MODE_CAPTURED
+	#look for warden
+	warden_node=get_parent().get_node("Warden")
+	await get_tree().create_timer(1.0).timeout
+	can_hear=true
+	#bar
+	$CanvasLayer/ProgressBar.max_value=100
+	$CanvasLayer/ProgressBar.value=100
 	
 func _input(event):
 	if event is InputEventMouseMotion:
@@ -31,6 +47,9 @@ func _input(event):
 @warning_ignore("unused_parameter")
 func _process(delta):
 	time_passed+=delta
+	if can_hear==false:
+		chest_light.light_energy=0.0
+		return
 	var mic_bus_index=AudioServer.get_bus_index("MicInput")
 	var volume_db=AudioServer.get_bus_peak_volume_left_db(mic_bus_index,0)
 	
@@ -59,7 +78,30 @@ func _process(delta):
 		target_range=0.0
 		target_color=Color.BLACK
 		
+	#sanity logic
+	if target_energy==0.0:
+		sanity-=delta*SANITY_HEAL_SPEED
+	else:
+		sanity+=delta*SANITY_HEAL_SPEED
+		
+	sanity=clamp(sanity,0.0,100.0)
 	
+	$CanvasLayer/ProgressBar.value=sanity
+	
+	#warden
+	if warden_node:
+		var dist_to_warden=global_position.distance_to(warden_node.global_position)
+		
+	#if he is close but we are not holding breath
+		if dist_to_warden<PANIC_DISTANCE:
+			if Input.is_action_just_pressed("hold_breath"):
+				#safe
+				sanity-=delta*10.0
+			else:
+				#panic
+				var panic_flicker=randf_range(0.1,5.0)
+				target_energy=panic_flicker
+				target_color=COLOR_EMBER
 	chest_light.light_energy=lerp(chest_light.light_energy,target_energy,0.1)
 	chest_light.omni_range=lerp(chest_light.omni_range,target_range,0.1)
 	

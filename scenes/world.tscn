@@ -2,6 +2,16 @@
 
 [ext_resource type="PackedScene" uid="uid://bfnca7rpcg0rk" path="res://scenes/player.tscn" id="1_nnsk1"]
 [ext_resource type="PackedScene" uid="uid://ba4b0lv37htva" path="res://scenes/warden.tscn" id="2_rwgxs"]
+[ext_resource type="PackedScene" uid="uid://d1bs5qhp1wn50" path="res://spooky_hallway_-_blender_cycles_bake.glb" id="3_4wyf3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4wyf3"]
+size = Vector3(11.942001, 1, 2.5671387)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_k0juu"]
+size = Vector3(1.6314087, 0.6151123, 5.6078568)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_71j4m"]
+size = Vector3(4.592041, 0.52819824, 1.2889404)
 
 [sub_resource type="Environment" id="Environment_e5uuo"]
 background_mode = 1
@@ -11,14 +21,11 @@ ambient_light_source = 1
 use_collision = true
 size = Vector3(4, 1, 40)
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=892503922]
-environment = SubResource("Environment_e5uuo")
-
 [node name="Player" parent="." unique_id=1082263877 instance=ExtResource("1_nnsk1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.16529918, 0.74534464, 18.278584)
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 71.40307, 5.075842, -54.958496)
 
 [node name="Warden" parent="." unique_id=466530888 instance=ExtResource("2_rwgxs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.47174, 1.057653, -22.077085)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.1234884, 3.7416406, -83.432205)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=2022923728]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3645654, 2.4982486, 0)
@@ -47,3 +54,25 @@ size = Vector3(1, 4, 40)
 [node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=1923209043]
 transform = Transform3D(-4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, 0, 0, 0, 1, 0.20413911, 3.9934535, 0)
 size = Vector3(1, 4, 40)
+
+[node name="Sketchfab_Scene" parent="." unique_id=501481741 instance=ExtResource("3_4wyf3")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 47.802, 0, -54.631)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Sketchfab_Scene" unique_id=773867523]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sketchfab_Scene/StaticBody3D" unique_id=1670924718]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.021354675, -0.4635252, -0.00012207031)
+shape = SubResource("BoxShape3D_4wyf3")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Sketchfab_Scene/StaticBody3D" unique_id=226815388]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1540837, -0.28469926, -3.8939877)
+shape = SubResource("BoxShape3D_k0juu")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Sketchfab_Scene/StaticBody3D" unique_id=843547786]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.6105685, -0.23590088, -6.0466223)
+shape = SubResource("BoxShape3D_71j4m")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Sketchfab_Scene" unique_id=892503922]
+environment = SubResource("Environment_e5uuo")
+
+[editable path="Sketchfab_Scene"]

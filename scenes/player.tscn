@@ -7,6 +7,12 @@ height = 1.5
 
 [sub_resource type="AudioStreamMicrophone" id="AudioStreamMicrophone_3vyb7"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3vyb7"]
+bg_color = Color(0.23537049, 0.23537055, 0.23537043, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g2els"]
+bg_color = Color(0.42911583, 0.06362772, 0.039915457, 1)
+
 [node name="Player" type="CharacterBody3D" unique_id=1082263877]
 script = ExtResource("1_3vyb7")
 
@@ -26,3 +32,21 @@ omni_range = 10.0
 stream = SubResource("AudioStreamMicrophone_3vyb7")
 autoplay = true
 bus = &"MicInput"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1236617360]
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer" unique_id=113989474]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -643.0
+offset_right = -892.0
+offset_bottom = -616.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_3vyb7")
+theme_override_styles/fill = SubResource("StyleBoxFlat_g2els")
+min_value = 50.0
+value = 50.0
+show_percentage = false
