@@ -108,7 +108,7 @@ func _process(delta):
 	if target_energy>0.1:
 		chest_light.light_color=target_color
 		
-func _physics_process(delta: float) -> void:
+func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -129,3 +129,8 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 	move_and_slide()
+
+
+@warning_ignore("unused_parameter")
+func _on_area_3d_body_entered(body: Node3D) -> void:
+	pass # Replace with function body.

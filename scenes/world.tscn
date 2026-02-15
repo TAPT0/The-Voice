@@ -5,15 +5,82 @@
 [ext_resource type="PackedScene" uid="uid://ba4b0lv37htva" path="res://scenes/warden.tscn" id="2_rwgxs"]
 [ext_resource type="Material" uid="uid://bjvyruhui8cj7" path="res://assets/wall/Bricks097_2K-JPG.tres" id="4_71j4m"]
 [ext_resource type="Material" uid="uid://cs1iu71lygyx0" path="res://assets/celling/Concrete042C_2K-JPG.tres" id="5_qfnet"]
+[ext_resource type="Script" uid="uid://b3jlf3i10g45g" path="res://scripts/area_3d.gd" id="6_qfnet"]
+[ext_resource type="AudioStream" uid="uid://bnb4denvs2p4j" path="res://assets/warden/mixkit-terror-radio-frequency-2566.wav" id="7_i7141"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_i7141"]
+vertices = PackedVector3Array(-1.8645654, 4.7682695, -17.010006, 2.1354346, 4.7682695, -17.010006, 2.1354346, 4.7682695, -19.010006, 2.8854346, 4.7682695, -19.760006, 4.8854346, 4.7682695, -19.760006, 4.8854346, 4.7682695, -23.760006, -1.8645654, 4.7682695, -23.760006, 37.135433, 4.7682695, -19.760006, 37.135433, 4.7682695, -23.760006, -0.6145654, 1.0182694, -18.260006, 0.8854346, 1.0182694, -18.260006, 0.8854346, 1.0182694, -20.260006, -0.6145654, 1.0182694, -22.510006, 1.6354346, 1.0182694, -21.010006, 37.135433, 1.0182694, -21.010006, 37.135433, 1.0182694, -22.510006, -0.6145654, 1.0182694, 18.239994, 0.8854346, 1.0182694, 18.239994, -1.8645654, 4.7682695, 18.989994, 2.1354346, 4.7682695, 18.989994)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(5, 4, 3), PackedInt32Array(2, 0, 3), PackedInt32Array(3, 0, 6), PackedInt32Array(3, 6, 5), PackedInt32Array(5, 8, 4), PackedInt32Array(4, 8, 7), PackedInt32Array(10, 9, 11), PackedInt32Array(11, 9, 12), PackedInt32Array(14, 13, 15), PackedInt32Array(15, 13, 12), PackedInt32Array(13, 11, 12), PackedInt32Array(17, 16, 10), PackedInt32Array(10, 16, 9), PackedInt32Array(19, 18, 1), PackedInt32Array(1, 18, 0)]
+agent_height = 2.0
+agent_radius = 1.0
 
 [sub_resource type="Environment" id="Environment_rwgxs"]
 background_mode = 1
 ambient_light_source = 1
 
-[node name="CSGBox3D" type="CSGBox3D" unique_id=2089314282]
+[sub_resource type="BoxMesh" id="BoxMesh_i7141"]
+size = Vector3(0.3, 0.1, 0.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4mrxx"]
+size = Vector3(0.3, 0.1, 0.2)
+
+[node name="Node3D" type="Node3D" unique_id=280251996]
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=204829323]
+navigation_mesh = SubResource("NavigationMesh_i7141")
+
+[node name="hallway" type="Node3D" parent="NavigationRegion3D" unique_id=1140244845]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/hallway" unique_id=1551064729]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3645654, 2.1415591, -2.3479004)
 use_collision = true
-size = Vector3(4, 1, 40)
+size = Vector3(1, 4.713379, 44.6958)
+material = ExtResource("4_71j4m")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="NavigationRegion3D/hallway" unique_id=1978192099]
+transform = Transform3D(1.9106855e-15, 4.371139e-08, 1, 1, -4.371139e-08, 0, 4.371139e-08, 1, -4.371139e-08, 18.033298, 0.018269526, -21.5677)
+use_collision = true
+size = Vector3(1, 4.625122, 40)
 material = ExtResource("1_4wyf3")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="NavigationRegion3D/hallway" unique_id=965069906]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -0.074341774, 0.018269526, -0.101047516)
+use_collision = true
+size = Vector3(1, 4.625122, 38.585938)
+material = ExtResource("1_4wyf3")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="NavigationRegion3D/hallway" unique_id=195325794]
+transform = Transform3D(1.9106855e-15, 4.371139e-08, 1, 1, -4.371139e-08, 0, 4.371139e-08, 1, -4.371139e-08, 18.033298, 3.9177456, -21.88026)
+use_collision = true
+size = Vector3(1, 4, 40)
+material = ExtResource("5_qfnet")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="NavigationRegion3D/hallway" unique_id=1098862620]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 18.033298, 2.4186382, -24.260006)
+use_collision = true
+size = Vector3(1, 4, 40)
+material = ExtResource("4_71j4m")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="NavigationRegion3D/hallway" unique_id=1935882214]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 20.170506, 2.4186382, -19.498154)
+use_collision = true
+size = Vector3(1, 4, 35.725586)
+material = ExtResource("4_71j4m")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D/hallway" unique_id=1059050921]
+transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 2.4082174, 2.4982486, 0)
+use_collision = true
+size = Vector3(1, 4, 40)
+material = ExtResource("4_71j4m")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="NavigationRegion3D/hallway" unique_id=1757506566]
+transform = Transform3D(-4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, 0, 0, 0, 1, 0.014197722, 3.9228854, 0)
+use_collision = true
+size = Vector3(1, 4.379883, 40)
+material = ExtResource("5_qfnet")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="NavigationRegion3D" unique_id=1151434326]
+environment = SubResource("Environment_rwgxs")
 
 [node name="Player" parent="." unique_id=1082263877 instance=ExtResource("1_nnsk1")]
 transform = Transform3D(0.009895835, 0, 0.99995106, 0, 1, 0, -0.99995106, 0, 0.009895835, 35.351475, 0.6901547, -21.91857)
@@ -21,40 +88,18 @@ transform = Transform3D(0.009895835, 0, 0.99995106, 0, 1, 0, -0.99995106, 0, 0.0
 [node name="Warden" parent="." unique_id=466530888 instance=ExtResource("2_rwgxs")]
 transform = Transform3D(-0.9991089, 0, -0.04220701, 0, 1, 0, 0.04220701, 0, -0.9991089, -0.1712122, 1.3526752, 17.605728)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=2022923728]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3645654, 2.1415591, -2.3479004)
-size = Vector3(1, 4.713379, 44.6958)
-material = ExtResource("4_71j4m")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1021599013]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.792755, 1.5041046, -22.353691)
+mesh = SubResource("BoxMesh_i7141")
+skeleton = NodePath("../..")
 
-[node name="CSGBox3D4" type="CSGBox3D" parent="." unique_id=816453462]
-transform = Transform3D(1.9106855e-15, 4.371139e-08, 1, 1, -4.371139e-08, 0, 4.371139e-08, 1, -4.371139e-08, 18.033298, 0.018269526, -21.5677)
-size = Vector3(1, 4.625122, 40)
-material = ExtResource("1_4wyf3")
+[node name="Area3D" type="Area3D" parent="MeshInstance3D" unique_id=2063325765]
+script = ExtResource("6_qfnet")
 
-[node name="CSGBox3D5" type="CSGBox3D" parent="." unique_id=1043499131]
-transform = Transform3D(1.9106855e-15, 4.371139e-08, 1, 1, -4.371139e-08, 0, 4.371139e-08, 1, -4.371139e-08, 18.033298, 3.9177456, -21.88026)
-size = Vector3(1, 4, 40)
-material = ExtResource("5_qfnet")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/Area3D" unique_id=260097797]
+shape = SubResource("BoxShape3D_4mrxx")
 
-[node name="CSGBox3D6" type="CSGBox3D" parent="." unique_id=139511989]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 18.033298, 2.4186382, -24.260006)
-size = Vector3(1, 4, 40)
-material = ExtResource("4_71j4m")
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="MeshInstance3D" unique_id=155538652]
+stream = ExtResource("7_i7141")
 
-[node name="CSGBox3D7" type="CSGBox3D" parent="." unique_id=72547450]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 20.170506, 2.4186382, -19.498154)
-size = Vector3(1, 4, 35.725586)
-material = ExtResource("4_71j4m")
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=139030916]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 2.4082174, 2.4982486, 0)
-size = Vector3(1, 4, 40)
-material = ExtResource("4_71j4m")
-
-[node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=1923209043]
-transform = Transform3D(-4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, 0, 0, 0, 1, 0.014197722, 3.9228854, 0)
-size = Vector3(1, 4.379883, 40)
-material = ExtResource("5_qfnet")
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1926046546]
-environment = SubResource("Environment_rwgxs")
+[connection signal="body_entered" from="MeshInstance3D/Area3D" to="MeshInstance3D/Area3D" method="_on_body_entered"]
