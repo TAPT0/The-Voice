@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://ba4b0lv37htva"]
+
+[ext_resource type="Script" uid="uid://dyxk6js25ahbs" path="res://scripts/warden.gd" id="1_wthw5"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_cgkur"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wthw5"]
+radius = 0.99658203
+height = 2.1552734
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3gffh"]
+
+[node name="Warden" type="CharacterBody3D" unique_id=466530888]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8664813, 0)
+script = ExtResource("1_wthw5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1949451072]
+mesh = SubResource("CapsuleMesh_cgkur")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=466936535]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1915750112]
+shape = SubResource("CapsuleShape3D_wthw5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1270167401]
+shape = SubResource("CapsuleShape3D_3gffh")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

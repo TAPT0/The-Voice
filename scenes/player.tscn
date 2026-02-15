@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://bfnca7rpcg0rk"]
+
+[ext_resource type="Script" uid="uid://cpn2jkauyjj2l" path="res://scripts/player.gd" id="1_3vyb7"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u8vuu"]
+height = 1.5
+
+[sub_resource type="AudioStreamMicrophone" id="AudioStreamMicrophone_3vyb7"]
+
+[node name="Player" type="CharacterBody3D" unique_id=1082263877]
+script = ExtResource("1_3vyb7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=595170158]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+shape = SubResource("CapsuleShape3D_u8vuu")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1260292679]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1295118, 0.07757592)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Camera3D" unique_id=1988683298]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.17844522, -0.6445688)
+light_energy = 0.0
+omni_range = 10.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1060601303]
+stream = SubResource("AudioStreamMicrophone_3vyb7")
+autoplay = true
+bus = &"MicInput"
