@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://dvmhgw1v5f1gb"]
+
+[ext_resource type="Script" uid="uid://dp7esd34a1qsp" path="res://scripts/locker.gd" id="1_46kxn"]
+[ext_resource type="PackedScene" uid="uid://csm4fviuyjm2v" path="res://assets/locker/box.FBX" id="2_byg57"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_46kxn"]
+size = Vector3(0.74780273, 2.5, 0.94970703)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_t0yql"]
+size = Vector3(1.3105469, 2.5, 1.4458008)
+
+[node name="Locker" type="StaticBody3D" unique_id=1572234052]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2369562, 0)
+script = ExtResource("1_46kxn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1153333477]
+transform = Transform3D(0.8125314, 0, -0.5829174, 0, 1, 0, 0.5829174, 0, 0.8125314, 0.026900597, 0, 0.05024705)
+shape = SubResource("BoxShape3D_46kxn")
+
+[node name="HidePoint" type="Marker3D" parent="." unique_id=406368148]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.21874273, 0.014067531)
+
+[node name="ExitPoint" type="Marker3D" parent="." unique_id=37642211]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2358706, 0.5542567, 0.32248378)
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1389025433]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=773978499]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.07421875, 0, 0.050048828)
+shape = SubResource("BoxShape3D_t0yql")
+
+[node name="box" parent="." unique_id=2079863874 instance=ExtResource("2_byg57")]
+transform = Transform3D(4.5, 0, 0, 0, 4.5, 0, 0, 0, 4.5, -1.8293699, -1.2369562, -0.123671174)
+
+[editable path="box"]

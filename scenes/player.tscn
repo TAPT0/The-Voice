@@ -28,6 +28,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.17844522, -0.6445688)
 light_energy = 0.0
 omni_range = 10.0
 
+[node name="RayCast3D" type="RayCast3D" parent="Camera3D" unique_id=1210991669]
+transform = Transform3D(-1, 0, -8.742278e-08, -8.7410356e-08, -0.016859135, 0.9998579, -1.4738724e-09, 0.9998579, 0.016859135, 0, 0, -0.094928384)
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1060601303]
 stream = SubResource("AudioStreamMicrophone_3vyb7")
 autoplay = true
