@@ -1,5 +1,8 @@
 extends CharacterBody3D
-
+#patrol system 
+@onready var patrol_points_parent=get_parent().get_node("PatrolPoints")
+var current_patrol_target=null
+var is_patrolling=true
 #timer anger
 var anger_timer=0.0
 #fix 
@@ -13,6 +16,9 @@ var player_node
 const SPEED = 20.0
 
 func _ready():
+	#wait for map to load
+	await get_tree().create_timer(1.0).timeout
+	get_new_patrol_point()
 	#find the player in the world
 	player_node=get_parent().get_node("Player")
 		
@@ -55,6 +61,17 @@ func _physics_process(delta):
 				#smart moving
 		if is_hunting:
 			$NavigationAgent3D.target_position=player_node.global_position
+		else:
+			#patrol
+			if $NavigationAgent3D.is_navigation_finished():
+				velocity=Vector3.ZERO
+				if anim_player.current_animation !="Take 001":
+					anim_player.play("Take 001",0.5)
+				
+				#timer
+				await get_tree().create_timer(2.0).timeout
+				get_new_patrol_point()
+				return
 			
 			#next 
 			var next_location=$NavigationAgent3D.get_next_path_position()
@@ -71,14 +88,19 @@ func _physics_process(delta):
 			#animation run
 			if anim_player.current_animation !="mixamo_com":
 				anim_player.play("mixamo_com")
-		else:
-			velocity=Vector3.ZERO
-			#animation idle
-			if anim_player.current_animation !="Take 001":
-				anim_player.play("Take 001")
 		move_and_slide()
 
 func _on_area_3d_body_entered(body):
 	if body.name=="Player":
 		#reload the game 
 		get_tree().call_deferred("reload_current_scene")
+
+#patrol
+func get_new_patrol_point():
+	var points=patrol_points_parent.get_children()
+	
+	var random_point=points.pick_random()
+	current_patrol_target=random_point.global_position
+	$NavigationAgent3D.target_position=current_patrol_target
+	
+	is_patrolling=true

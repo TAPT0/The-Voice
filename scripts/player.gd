@@ -1,5 +1,8 @@
 extends CharacterBody3D
 
+#sprint
+var WALK_SPEED=3.0
+var RUN_SPEED=20.0
 #hide system
 var is_hidden=false
 var current_locker=null
@@ -143,16 +146,25 @@ func _physics_process(delta):
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	
+	#sprint
+	var current_speed=WALK_SPEED
+	#shift to run
+	if Input.is_action_pressed("sprint") and not is_hidden:
+		print("I am ruuning!")
+		current_speed=RUN_SPEED
+		
 	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
+		velocity.x = direction.x * current_speed
+		velocity.z = direction.z * current_speed
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
+		velocity.x = move_toward(velocity.x, 0, current_speed)
+		velocity.z = move_toward(velocity.z, 0, current_speed)
 
 	move_and_slide()
 
 #hide function
+@warning_ignore("unused_parameter")
 func hide_in_locker(hide_pos,locker_obj):
 	is_hidden=true
 	
