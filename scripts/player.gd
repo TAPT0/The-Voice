@@ -1,5 +1,7 @@
 extends CharacterBody3D
-
+#death
+var is_dead=false
+@onready var jumpscare_face=$CanvasLayer/JumpscareFace
 #sprint
 var WALK_SPEED=3.0
 var RUN_SPEED=20.0
@@ -47,6 +49,8 @@ func _ready():
 	$CanvasLayer/ProgressBar.value=100
 	
 func _input(event):
+	if is_dead:
+		return
 	if event is InputEventMouseMotion:
 		rotate_y(-event.relative.x*MOUSE_SENSITIVITY)
 		camera.rotate_x(-event.relative.y*MOUSE_SENSITIVITY)
@@ -131,6 +135,8 @@ func _process(delta):
 		chest_light.light_color=target_color
 		
 func _physics_process(delta):
+	if is_dead:
+		return
 	#stop gravity if hidden
 	if is_hidden:
 		return
@@ -179,3 +185,19 @@ func exit_locker(exit_pos):
 	is_hidden=false
 	global_position=exit_pos
 	$CollisionShape3D.disabled=false
+
+func die():
+	is_dead=true
+	#stop movemnent
+	velocity=Vector3.ZERO
+	
+	#flash the scary face
+	jumpscare_face.show()
+	
+	await get_tree().create_timer(1.5).timeout
+	
+	#restart
+	get_tree().reload_current_scene()
+	
+func restart_game():
+	get_tree().reload_current_scene()
