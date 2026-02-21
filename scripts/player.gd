@@ -157,7 +157,6 @@ func _physics_process(delta):
 	var current_speed=WALK_SPEED
 	#shift to run
 	if Input.is_action_pressed("sprint") and not is_hidden:
-		print("I am ruuning!")
 		current_speed=RUN_SPEED
 		
 	if direction:

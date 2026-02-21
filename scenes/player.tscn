@@ -15,6 +15,7 @@ bg_color = Color(0.23537049, 0.23537055, 0.23537043, 1)
 bg_color = Color(0.42911583, 0.06362772, 0.039915457, 1)
 
 [node name="Player" type="CharacterBody3D" unique_id=1082263877]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 script = ExtResource("1_3vyb7")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=595170158]
@@ -22,7 +23,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 shape = SubResource("CapsuleShape3D_u8vuu")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1260292679]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1295118, 0.07757592)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.1295118, -0.3546878)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Camera3D" unique_id=1988683298]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.17844522, -0.6445688)
