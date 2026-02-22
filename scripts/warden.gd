@@ -30,6 +30,10 @@ func _physics_process(delta):
 		return
 		
 	var distance=global_position.distance_to(player_node.global_position)
+	#teleport
+	if distance>30.0 and not player_node.is_hidden:
+		ghost_teleport()
+		return
 	#kill player
 	if distance<1.5 and not player_node.is_hidden:
 		is_jumpscaring=true
@@ -118,3 +122,20 @@ func get_new_patrol_point():
 	if points.size()>0:
 		var random_point=points.pick_random()
 		nav_agent.target_position=random_point.global_position
+
+func ghost_teleport():
+	#spawn points
+	var spawn_nodes=get_parent().get_node("SpawnPoints").get_children()
+	if spawn_nodes.size()==0:
+		return
+		
+	#randomize
+	var random_spot=spawn_nodes.pick_random()
+	
+	#teleport 
+	global_position=random_spot.global_position
+	#no yaadasht
+	is_hunting=false
+	anger_timer=0.0
+	wait_timer=2.0
+	$NavigationAgent3D.target_position=global_position
