@@ -1,4 +1,9 @@
 extends CharacterBody3D
+
+#pocket
+var tapes_collected=0
+var total_tapes=5
+@onready var tape_counter=$CanvasLayer/TapeCounter
 #death
 var is_dead=false
 @onready var jumpscare_face=$CanvasLayer/JumpscareFace
@@ -200,3 +205,11 @@ func die():
 	
 func restart_game():
 	get_tree().reload_current_scene()
+
+#tape
+func collect_tape():
+	tapes_collected+=1
+	#text on screen
+	tape_counter.text="Tapes:"+str(tapes_collected)+"/"+str(total_tapes)
+	if tapes_collected>=total_tapes:
+		print("you won")

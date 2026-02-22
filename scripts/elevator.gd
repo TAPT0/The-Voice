@@ -5,7 +5,7 @@ var is_at_top=false
 
 var bottom_height =0.008
 var top_height=24.231
-var travel_time=3.0
+var travel_time=6.0
 
 @warning_ignore("unused_parameter")
 func interact(user):

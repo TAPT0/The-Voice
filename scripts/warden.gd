@@ -94,23 +94,31 @@ func _physics_process(delta):
 	
 	var next_location=nav_agent.get_next_path_position()
 	var direction=global_position.direction_to(next_location)
+	direction.y=0.0
+	direction=direction.normalized()
 	#fix glitvh
 	if global_position.distance_to(next_location)>0.5:
 		#face that direction smoothly
-		var target_rotation=transform.looking_at(next_location,Vector3.UP).basis
-		transform.basis=transform.basis.slerp(target_rotation,delta*8.0)
+		var look_target=Vector3(next_location.x,global_position.y,next_location.z)
+		if global_position.distance_to(look_target)>0.05:
+			var target_rotation=transform.looking_at(look_target,Vector3.UP).basis
+			transform.basis=transform.basis.slerp(target_rotation,delta*8.0)
 		rotation.x=0
 		rotation.z=0
-		velocity=direction*current_speed
+		velocity.x=direction.x*current_speed
+		velocity.z=direction.z*current_speed
 		
-		#animationrun
+		#animatioon run
 		if anim_player.current_animation !="mixamo_com":
 			anim_player.play("mixamo_com")
-		else:
-			velocity=Vector3.ZERO
-			if anim_player.current_animation != "Take 001":
-				anim_player.play("Take 001",0.5)
-		move_and_slide()
+	else:
+		velocity.z=0.0
+		velocity.z=0.0
+		if anim_player.current_animation !="Take 001":
+			anim_player.play("Take 001",0.5)
+	if not is_on_floor():
+		velocity.y -=9.8*delta
+	move_and_slide()
 func _on_area_3d_body_entered(body):
 	if body.name=="Player":
 		#reload the game

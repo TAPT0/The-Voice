@@ -32,6 +32,7 @@ omni_range = 10.0
 
 [node name="RayCast3D" type="RayCast3D" parent="Camera3D" unique_id=1210991669]
 transform = Transform3D(-1, 0, -8.742278e-08, -8.7410356e-08, -0.016859135, 0.9998579, -1.4738724e-09, 0.9998579, 0.016859135, 0, 0, -0.094928384)
+collide_with_areas = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1060601303]
 stream = SubResource("AudioStreamMicrophone_3vyb7")
@@ -73,3 +74,11 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_g2els")
 expand_mode = 1
+
+[node name="TapeCounter" type="Label" parent="CanvasLayer" unique_id=1381176361]
+offset_left = 23.0
+offset_top = 35.0
+offset_right = 209.0
+offset_bottom = 90.0
+theme_override_font_sizes/font_size = 40
+text = "Tapes:0/5"
