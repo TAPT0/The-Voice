@@ -10,7 +10,7 @@ var is_dead=false
 @onready var jumpscare_face=$CanvasLayer/JumpscareFace
 #sprint
 var WALK_SPEED=3.0
-var RUN_SPEED=20.0
+var RUN_SPEED=10.0
 #hide system
 var is_hidden=false
 var current_locker=null
@@ -226,7 +226,7 @@ func collect_tape():
 	#text on screen
 	tape_counter.text="Tapes:"+str(tapes_collected)+"/"+str(total_tapes)
 	if tapes_collected>=total_tapes:
-		print("you won")
+		trigger_win()
 #key
 func collect_key():
 	has_key=true
@@ -250,3 +250,10 @@ func trigger_jumpscare(monster_head_position):
 		#gameover
 		$GameOverMenu.visible=true
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+func trigger_win():
+	#show creen
+	$WinScreen.visible=true
+	#unlock mouse
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	#freeze the game
+	get_tree().paused=true

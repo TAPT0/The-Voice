@@ -49,12 +49,6 @@ size = Vector3(42.450714, 1, 4.573303)
 [sub_resource type="BoxShape3D" id="BoxShape3D_e3hyu"]
 size = Vector3(41.023636, 1, 47.61966)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q5onr"]
-albedo_texture = ExtResource("9_e3hyu")
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_4mrxx"]
-size = Vector3(0.40355223, 0.06965332, 0.24946289)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_q5onr"]
 size = Vector3(0.43847656, 7.1018066, 43.318066)
 
@@ -73,6 +67,12 @@ size = Vector3(1.1127625, 1.5915527, 1.638916)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kpybi"]
 size = Vector3(0.9170532, 0.39160156, 1.649353)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fh13f"]
+size = Vector3(3.8157043, 1, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rup4s"]
+size = Vector3(0.592041, 1.4051514, 3.0010376)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_pm21f"]
 size = Vector3(0.1854248, 2.1880493, 1.0708618)
@@ -102,6 +102,12 @@ size = Vector3(2.0052032, 5.5592346, 0.5358887)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0nbtd"]
 size = Vector3(2.3449707, 1.4403076, 0.69921875)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q5onr"]
+albedo_texture = ExtResource("9_e3hyu")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4mrxx"]
+size = Vector3(0.40355223, 0.06965332, 0.24946289)
 
 [node name="world" type="Node3D" unique_id=280251996]
 
@@ -384,58 +390,6 @@ transform = Transform3D(-0.62062794, 0, 0.7841053, 0, 1, 0, -0.7841053, 0, -0.62
 
 [node name="Locker2" parent="." unique_id=732642699 instance=ExtResource("9_7r4gi")]
 transform = Transform3D(0.8312659, 0, 0.5558749, 0, 1, 0, -0.5558749, 0, 0.8312659, -0.18731451, 25.869734, -21.609016)
-
-[node name="Tape3" type="MeshInstance3D" parent="." unique_id=2088864036]
-transform = Transform3D(-0.29999995, 0, -1.4901161e-08, 0, 0.29999995, 0, 1.4901161e-08, 0, -0.29999995, 37.642086, 24.819637, -16.62048)
-mesh = ExtResource("8_w7kh3")
-skeleton = NodePath("../Decor/NightStand_1")
-surface_material_override/0 = SubResource("StandardMaterial3D_q5onr")
-
-[node name="Area3D" type="Area3D" parent="Tape3" unique_id=168147490]
-transform = Transform3D(3.333333, 0, 0, 0, 3.333333, 0, 0, 0, 3.333333, -0.37218475, 0.052458763, 0.06474304)
-script = ExtResource("6_qfnet")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tape3/Area3D" unique_id=1115937609]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.106695175, -0.015173316, -0.02473259)
-shape = SubResource("BoxShape3D_4mrxx")
-
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Tape3" unique_id=1421534674]
-transform = Transform3D(3.333333, 0, 0, 0, 3.333333, 0, 0, 0, 3.333333, -0.0060424805, 0.052458763, 0.06474304)
-stream = ExtResource("7_i7141")
-
-[node name="Tape" type="MeshInstance3D" parent="." unique_id=2060104212]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 22.678497, 1.177398, -22.586538)
-mesh = ExtResource("8_w7kh3")
-surface_material_override/0 = SubResource("StandardMaterial3D_q5onr")
-
-[node name="Area3D" type="Area3D" parent="Tape" unique_id=2063325765]
-transform = Transform3D(3.333333, 0, 0, 0, 3.333333, 0, 0, 0, 3.333333, -0.37218475, 0.052458763, 0.06474304)
-script = ExtResource("6_qfnet")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tape/Area3D" unique_id=260097797]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.106695175, -0.015173316, -0.02473259)
-shape = SubResource("BoxShape3D_4mrxx")
-
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Tape" unique_id=155538652]
-transform = Transform3D(3.333333, 0, 0, 0, 3.333333, 0, 0, 0, 3.333333, -0.0060424805, 0.052458763, 0.06474304)
-stream = ExtResource("7_i7141")
-
-[node name="Tape2" type="MeshInstance3D" parent="." unique_id=1012573713]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.8938339, 24.75998, -21.497906)
-mesh = ExtResource("8_w7kh3")
-surface_material_override/0 = SubResource("StandardMaterial3D_q5onr")
-
-[node name="Area3D" type="Area3D" parent="Tape2" unique_id=1239944505]
-transform = Transform3D(3.333333, 0, 0, 0, 3.333333, 0, 0, 0, 3.333333, -0.37218475, 0.052458763, 0.06474304)
-script = ExtResource("6_qfnet")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tape2/Area3D" unique_id=2054395928]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.106695175, -0.015173316, -0.02473259)
-shape = SubResource("BoxShape3D_4mrxx")
-
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Tape2" unique_id=111021926]
-transform = Transform3D(3.333333, 0, 0, 0, 3.333333, 0, 0, 0, 3.333333, -0.0060424805, 0.052458763, 0.06474304)
-stream = ExtResource("7_i7141")
 
 [node name="PatrolPoints" type="Node3D" parent="." unique_id=1847751881]
 
@@ -771,7 +725,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.36143112, 0.6198907, 0.007
 shape = SubResource("BoxShape3D_kpybi")
 
 [node name="bed_1" parent="Decor" unique_id=1896460405 instance=ExtResource("14_o8fc1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.64116, 4.562565, 20.016462)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.64116, 5.1262703, 20.016462)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Decor/bed_1" unique_id=1786446133]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Decor/bed_1/StaticBody3D" unique_id=71952127]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2485199, 0.03716278, -0.041015625)
+shape = SubResource("BoxShape3D_fh13f")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Decor/bed_1/StaticBody3D" unique_id=1957769557]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6267471, 0.35947227, -0.050201416)
+shape = SubResource("BoxShape3D_rup4s")
 
 [node name="Rooms" type="Node3D" parent="." unique_id=1569249727]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20.138754, 0)
@@ -1099,6 +1063,94 @@ text = "Resume"
 [node name="ExitButton" type="Button" parent="PauseMenu/VBoxContainer" unique_id=1456183990]
 layout_mode = 2
 text = "Exit"
+
+[node name="tapes" type="Node3D" parent="." unique_id=796524222]
+
+[node name="Tape" type="MeshInstance3D" parent="tapes" unique_id=1537412454]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 22.678497, 1.177398, -22.586538)
+mesh = ExtResource("8_w7kh3")
+surface_material_override/0 = SubResource("StandardMaterial3D_q5onr")
+
+[node name="Area3D" type="Area3D" parent="tapes/Tape" unique_id=35402568]
+transform = Transform3D(3.333333, 0, 0, 0, 3.333333, 0, 0, 0, 3.333333, -0.37218475, 0.052458763, 0.06474304)
+script = ExtResource("6_qfnet")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="tapes/Tape/Area3D" unique_id=242155087]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.106695175, -0.015173316, -0.02473259)
+shape = SubResource("BoxShape3D_4mrxx")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="tapes/Tape" unique_id=2016434806]
+transform = Transform3D(3.333333, 0, 0, 0, 3.333333, 0, 0, 0, 3.333333, -0.0060424805, 0.052458763, 0.06474304)
+stream = ExtResource("7_i7141")
+
+[node name="Tape2" type="MeshInstance3D" parent="tapes" unique_id=54217567]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.8938339, 24.75998, -21.497906)
+mesh = ExtResource("8_w7kh3")
+surface_material_override/0 = SubResource("StandardMaterial3D_q5onr")
+
+[node name="Area3D" type="Area3D" parent="tapes/Tape2" unique_id=1661098534]
+transform = Transform3D(3.333333, 0, 0, 0, 3.333333, 0, 0, 0, 3.333333, -0.37218475, 0.052458763, 0.06474304)
+script = ExtResource("6_qfnet")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="tapes/Tape2/Area3D" unique_id=1855356028]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.106695175, -0.015173316, -0.02473259)
+shape = SubResource("BoxShape3D_4mrxx")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="tapes/Tape2" unique_id=212261894]
+transform = Transform3D(3.333333, 0, 0, 0, 3.333333, 0, 0, 0, 3.333333, -0.0060424805, 0.052458763, 0.06474304)
+stream = ExtResource("7_i7141")
+
+[node name="Tape3" type="MeshInstance3D" parent="tapes" unique_id=1833761759]
+transform = Transform3D(-0.29999995, 0, -1.4901161e-08, 0, 0.29999995, 0, 1.4901161e-08, 0, -0.29999995, 37.642086, 24.819637, -16.62048)
+mesh = ExtResource("8_w7kh3")
+skeleton = NodePath("../Decor/NightStand_1")
+surface_material_override/0 = SubResource("StandardMaterial3D_q5onr")
+
+[node name="Area3D" type="Area3D" parent="tapes/Tape3" unique_id=2131992676]
+transform = Transform3D(3.333333, 0, 0, 0, 3.333333, 0, 0, 0, 3.333333, -0.37218475, 0.052458763, 0.06474304)
+script = ExtResource("6_qfnet")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="tapes/Tape3/Area3D" unique_id=1533666886]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.106695175, -0.015173316, -0.02473259)
+shape = SubResource("BoxShape3D_4mrxx")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="tapes/Tape3" unique_id=1853642666]
+transform = Transform3D(3.333333, 0, 0, 0, 3.333333, 0, 0, 0, 3.333333, -0.0060424805, 0.052458763, 0.06474304)
+stream = ExtResource("7_i7141")
+
+[node name="Tape4" type="MeshInstance3D" parent="tapes" unique_id=1331853830]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 33.51248, 24.704433, -20.423746)
+mesh = ExtResource("8_w7kh3")
+surface_material_override/0 = SubResource("StandardMaterial3D_q5onr")
+
+[node name="Area3D" type="Area3D" parent="tapes/Tape4" unique_id=1398067947]
+transform = Transform3D(3.333333, 0, 0, 0, 3.333333, 0, 0, 0, 3.333333, -0.37218475, 0.052458763, 0.06474304)
+script = ExtResource("6_qfnet")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="tapes/Tape4/Area3D" unique_id=1864257502]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.106695175, -0.015173316, -0.02473259)
+shape = SubResource("BoxShape3D_4mrxx")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="tapes/Tape4" unique_id=247375955]
+transform = Transform3D(3.333333, 0, 0, 0, 3.333333, 0, 0, 0, 3.333333, -0.0060424805, 0.052458763, 0.06474304)
+stream = ExtResource("7_i7141")
+
+[node name="Tape5" type="MeshInstance3D" parent="tapes" unique_id=2069219527]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 37.471054, 25.838417, 18.649307)
+mesh = ExtResource("8_w7kh3")
+surface_material_override/0 = SubResource("StandardMaterial3D_q5onr")
+
+[node name="Area3D" type="Area3D" parent="tapes/Tape5" unique_id=836341114]
+transform = Transform3D(3.333333, 0, 0, 0, 3.333333, 0, 0, 0, 3.333333, -0.37218475, 0.052458763, 0.06474304)
+script = ExtResource("6_qfnet")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="tapes/Tape5/Area3D" unique_id=2061388387]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.106695175, -0.015173316, -0.02473259)
+shape = SubResource("BoxShape3D_4mrxx")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="tapes/Tape5" unique_id=1362780799]
+transform = Transform3D(3.333333, 0, 0, 0, 3.333333, 0, 0, 0, 3.333333, -0.0060424805, 0.052458763, 0.06474304)
+stream = ExtResource("7_i7141")
 
 [connection signal="pressed" from="PauseMenu/VBoxContainer/ResumeButton" to="PauseMenu" method="_on_resume_button_pressed"]
 [connection signal="pressed" from="PauseMenu/VBoxContainer/ExitButton" to="PauseMenu" method="_on_exit_button_pressed"]
