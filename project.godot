@@ -23,6 +23,11 @@ config/features=PackedStringArray("4.6", "Mobile")
 buses/default_bus_layout="uid://c05avmes3yeob"
 driver/enable_input=true
 
+[display]
+
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+
 [dotnet]
 
 project/assembly_name="WakatimePlugin"
