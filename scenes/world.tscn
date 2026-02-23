@@ -94,6 +94,9 @@ material = SubResource("StandardMaterial3D_ctatt")
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_xgqkh"]
 radius = 0.10058594
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_luhhm"]
+size = Vector3(0.546875, 0.670166, 0.75427246)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_ts3gi"]
 size = Vector3(2.0052032, 5.5592346, 0.5358887)
 
@@ -377,7 +380,7 @@ transform = Transform3D(0.009895835, 0, 0.99995106, 0, 1, 0, -0.99995106, 0, 0.0
 transform = Transform3D(-0.9991089, 0, -0.04220701, 0, 1, 0, 0.04220701, 0, -0.9991089, -0.1712122, 1.3526752, 17.605728)
 
 [node name="Locker" parent="." unique_id=1572234052 instance=ExtResource("9_7r4gi")]
-transform = Transform3D(-0.62062794, 0, 0.7841053, 0, 1, 0, -0.7841053, 0, -0.62062794, 30.11325, 1.7292175, -20.572817)
+transform = Transform3D(-0.62062794, 0, 0.7841053, 0, 1, 0, -0.7841053, 0, -0.62062794, 30.11325, 1.7292175, -20.168842)
 
 [node name="Locker2" parent="." unique_id=732642699 instance=ExtResource("9_7r4gi")]
 transform = Transform3D(0.8312659, 0, 0.5558749, 0, 1, 0, -0.5558749, 0, 0.8312659, -0.18731451, 25.869734, -21.609016)
@@ -1034,7 +1037,14 @@ shape = SubResource("CylinderShape3D_xgqkh")
 stream = ExtResource("26_0nbtd")
 
 [node name="Key" parent="." unique_id=1623786780 instance=ExtResource("23_ctatt")]
-transform = Transform3D(0.0036128245, -0.9999935, 0, 0.9999935, 0.0036128245, 0, 0, 0, 1, -1.3296534, 1.1495641, -9.3476)
+transform = Transform3D(0.0036128245, -0.9999935, 0, 0.9999935, 0.0036128245, 0, 0, 0, 1, -1.3296534, 1.1495641, -5.7972326)
+
+[node name="Cube_011" parent="Key" unique_id=542940941 instance=ExtResource("29_37qwj")]
+transform = Transform3D(0.0010838474, 0.29999807, 0, -0.29999807, 0.0010838474, 0, 0, 0, 0.3, -0.31272358, 0.08808744, -0.06159973)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Key" unique_id=952608457]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.32031226, 0.053345203, -0.06329346)
+shape = SubResource("BoxShape3D_luhhm")
 
 [node name="WallForDoor_1" parent="." unique_id=1126051408 instance=ExtResource("25_xgqkh")]
 transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, 37.59366, 1.916893, -22.280106)
@@ -1055,9 +1065,6 @@ shape = SubResource("BoxShape3D_0nbtd")
 
 [node name="Wall_1" parent="WallForDoor_1" unique_id=22625407 instance=ExtResource("12_q5onr")]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -4.7922935, 0.32373428, -0.04019928)
-
-[node name="Cube_011" parent="." unique_id=542940941 instance=ExtResource("29_37qwj")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -1.4188701, 0.8371608, -9.4092)
 
 [node name="PauseMenu" type="CanvasLayer" parent="." unique_id=1057068263]
 process_mode = 3

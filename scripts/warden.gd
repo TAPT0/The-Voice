@@ -37,12 +37,13 @@ func _physics_process(delta):
 		return
 	#kill player
 	if distance<1.5 and not player_node.is_hidden:
-		is_jumpscaring=true
+		if player_node.has_method("trigger_jumpscare"):
+			var face_poss=global_position+Vector3(0,1.2,0)
+			player_node.trigger_jumpscare(face_poss)
 		velocity=Vector3.ZERO
 		#stop animation
 		if anim_player.current_animation !="Take 001":
 			anim_player.play("Take 001")
-		player_node.die()
 		return
 	#mic
 	if not player_node.is_hidden:

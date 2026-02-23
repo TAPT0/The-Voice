@@ -231,3 +231,22 @@ func collect_tape():
 func collect_key():
 	has_key=true
 	print("key collected")
+func trigger_jumpscare(monster_head_position):
+	if is_dead:
+		return
+	is_dead=true
+	#stop heartbeat
+	if $HeartbeatSound.playing:
+		$HeartbeatSound.stop()
+		#jumpscare
+		$JumpScareSound.play()
+		#violently snap the camera
+		$Camera3D.look_at(monster_head_position,Vector3.UP)
+		#zoom
+		var tween=create_tween()
+		tween.tween_property($Camera3D,"fov",30.0,0.2).set_trans(Tween.TRANS_BOUNCE)
+		#wait 
+		await get_tree().create_timer(1.5).timeout
+		#gameover
+		$GameOverMenu.visible=true
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
