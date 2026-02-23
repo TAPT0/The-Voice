@@ -11,7 +11,7 @@ var is_dead=false
 #sprint
 var WALK_SPEED=3.0
 var RUN_SPEED=10.0
-#hide system
+#hide systemh
 var is_hidden=false
 var current_locker=null
 

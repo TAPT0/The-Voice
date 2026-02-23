@@ -19,6 +19,7 @@ bg_color = Color(0.23537049, 0.23537055, 0.23537043, 1)
 bg_color = Color(0.42911583, 0.06362772, 0.039915457, 1)
 
 [sub_resource type="SystemFont" id="SystemFont_fjrip"]
+subpixel_positioning = 0
 
 [node name="Player" type="CharacterBody3D" unique_id=1082263877]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
@@ -150,6 +151,7 @@ text = "Give Up"
 
 [node name="WinScreen" type="CanvasLayer" parent="." unique_id=1619132446]
 process_mode = 3
+visible = false
 script = ExtResource("6_tuyoq")
 
 [node name="ColorRect" type="ColorRect" parent="WinScreen" unique_id=1960499693]

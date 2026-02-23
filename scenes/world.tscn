@@ -31,6 +31,7 @@
 [ext_resource type="AudioStream" uid="uid://buxdjtynne14g" path="res://assets/sound effects/freesound_community-gears-18005.mp3" id="26_0nbtd"]
 [ext_resource type="PackedScene" uid="uid://chos3dk3efm55" path="res://assets/horror paaji/HorrorPackFBX/Cube_011.fbx" id="29_37qwj"]
 [ext_resource type="Script" uid="uid://c0f3ttu0vdu0l" path="res://scripts/pause_menu.gd" id="31_luhhm"]
+[ext_resource type="PackedScene" uid="uid://c6usnnm1e4dtp" path="res://scenes/lever.tscn" id="32_fh13f"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_i7141"]
 vertices = PackedVector3Array(-2.4770756, 25.022642, -24.491482, -2.4770756, 25.022642, 22.008518, 38.272926, 25.022642, 22.008518, 38.272926, 25.022642, -24.491482, -2.2270756, 4.7726426, -15.491482, 3.2729244, 4.7726426, -15.491482, 3.2729244, 4.7726426, -17.491482, 3.7729244, 4.7726426, -17.991482, 5.2729244, 4.7726426, -17.991482, 5.0229244, 4.7726426, -24.241482, -2.2270756, 4.7726426, -23.991482, 37.522926, 4.7726426, -17.991482, 37.522926, 4.7726426, -24.241482, 3.2729244, 1.0226426, -22.991482, 3.2729244, 1.0226426, -21.491482, 38.772926, 1.0226426, -21.241482, 38.772926, 1.0226426, -23.241482, 1.2729244, 1.0226426, -21.491482, -0.9770756, 1.0226426, -22.991482, -0.9770756, 1.0226426, 19.508518, 0.7729244, 1.0226426, 19.508518, 0.7729244, 1.0226426, -20.991482, 4.7729244, 0.7726426, -19.741482, 4.7729244, 0.7726426, -18.991482, 37.272926, 0.7726426, -18.991482, 37.272926, 0.7726426, -19.741482, -2.2270756, 4.7726426, 19.258518, 3.2729244, 4.7726426, 19.258518)
@@ -83,19 +84,8 @@ size = Vector3(0.8988037, 0.5853882, 1.072815)
 [sub_resource type="BoxShape3D" id="BoxShape3D_xgqkh"]
 size = Vector3(2.1384277, 0.11186524, 1.9244385)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_munwf"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ctatt"]
-albedo_color = Color(0.21176471, 0.21176471, 0.61960787, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_ts3gi"]
-material = SubResource("StandardMaterial3D_ctatt")
-
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_xgqkh"]
 radius = 0.10058594
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_luhhm"]
-size = Vector3(0.546875, 0.670166, 0.75427246)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ts3gi"]
 size = Vector3(2.0052032, 5.5592346, 0.5358887)
@@ -108,6 +98,16 @@ albedo_texture = ExtResource("9_e3hyu")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4mrxx"]
 size = Vector3(0.40355223, 0.06965332, 0.24946289)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_luhhm"]
+size = Vector3(0.546875, 0.670166, 0.75427246)
+
+[sub_resource type="Environment" id="Environment_luhhm"]
+background_mode = 1
+ambient_light_source = 2
+ambient_light_color = Color(0.019925633, 0.019925632, 0.019925632, 1)
+tonemap_mode = 3
+fog_enabled = true
 
 [node name="world" type="Node3D" unique_id=280251996]
 
@@ -961,15 +961,6 @@ script = ExtResource("22_oo54l")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.477417, 0.5028077, 0.101379395)
 shape = SubResource("BoxShape3D_xgqkh")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="Elevator" unique_id=1373047135]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 1.3549194, 1.4031274, 0.12548065)
-shape = SubResource("BoxShape3D_munwf")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Elevator" unique_id=460137997]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 1.3549194, 1.4031274, 0.12548065)
-mesh = SubResource("BoxMesh_ts3gi")
-skeleton = NodePath("../CollisionShape3D2")
-
 [node name="Elevator" parent="Elevator" unique_id=1716115335 instance=ExtResource("23_kpybi")]
 transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, 0.32766724, 0.5143951, -0.021881104)
 
@@ -1000,15 +991,12 @@ shape = SubResource("CylinderShape3D_xgqkh")
 [node name="LiftSound" type="AudioStreamPlayer3D" parent="Elevator" unique_id=1622657089]
 stream = ExtResource("26_0nbtd")
 
+[node name="Lever" parent="Elevator" unique_id=30966520 node_paths=PackedStringArray("elevator_node") instance=ExtResource("32_fh13f")]
+transform = Transform3D(-3.5204455e-06, -0.099842906, 0.0056030564, 6.2732135e-05, -0.0056030676, -0.09984288, 0.099999994, 2.6744752e-12, 6.283083e-05, 1.4630775, 1.221177, 0.09648514)
+elevator_node = NodePath("..")
+
 [node name="Key" parent="." unique_id=1623786780 instance=ExtResource("23_ctatt")]
 transform = Transform3D(0.0036128245, -0.9999935, 0, 0.9999935, 0.0036128245, 0, 0, 0, 1, -1.3296534, 1.1495641, -5.7972326)
-
-[node name="Cube_011" parent="Key" unique_id=542940941 instance=ExtResource("29_37qwj")]
-transform = Transform3D(0.0010838474, 0.29999807, 0, -0.29999807, 0.0010838474, 0, 0, 0, 0.3, -0.31272358, 0.08808744, -0.06159973)
-
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="Key" unique_id=952608457]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.32031226, 0.053345203, -0.06329346)
-shape = SubResource("BoxShape3D_luhhm")
 
 [node name="WallForDoor_1" parent="." unique_id=1126051408 instance=ExtResource("25_xgqkh")]
 transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, 37.59366, 1.916893, -22.280106)
@@ -1151,6 +1139,19 @@ shape = SubResource("BoxShape3D_4mrxx")
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="tapes/Tape5" unique_id=1362780799]
 transform = Transform3D(3.333333, 0, 0, 0, 3.333333, 0, 0, 0, 3.333333, -0.0060424805, 0.052458763, 0.06474304)
 stream = ExtResource("7_i7141")
+
+[node name="Table2" type="StaticBody3D" parent="." unique_id=231932730]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -1.273489, 1.1681919, -5.72743)
+
+[node name="Cube_011" parent="Table2" unique_id=542940941 instance=ExtResource("29_37qwj")]
+transform = Transform3D(0.0010838474, 0.29999807, 0, -0.29999807, 0.0010838474, 0, 0, 0, 0.3, -0.31272358, 0.08808744, -0.06159973)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Table2" unique_id=847135872]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.32031226, 0.053345203, -0.06329346)
+shape = SubResource("BoxShape3D_luhhm")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1596369340]
+environment = SubResource("Environment_luhhm")
 
 [connection signal="pressed" from="PauseMenu/VBoxContainer/ResumeButton" to="PauseMenu" method="_on_resume_button_pressed"]
 [connection signal="pressed" from="PauseMenu/VBoxContainer/ExitButton" to="PauseMenu" method="_on_exit_button_pressed"]
