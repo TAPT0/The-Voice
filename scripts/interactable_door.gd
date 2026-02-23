@@ -9,6 +9,8 @@ func interact(user):
 		return
 	is_open=not is_open
 	tween=create_tween()
+	#sound
+	$CreakSound.play()
 	
 	if is_open:
 		#swing the door 90 degres

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dyxk6js25ahbs" path="res://scripts/warden.gd" id="1_wthw5"]
 [ext_resource type="PackedScene" uid="uid://0388j8naspnf" path="res://assets/warden/warden.fbx" id="2_3gffh"]
+[ext_resource type="AudioStream" uid="uid://cdrl5g686cr57" path="res://assets/sound effects/freesound_community-floorboard_creak-107880.mp3" id="3_6w4ry"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wthw5"]
 radius = 0.6347656
@@ -188,6 +189,10 @@ shape = SubResource("CapsuleShape3D_3gffh")
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=2058774301]
 path_desired_distance = 1.5
 target_desired_distance = 2.0
+
+[node name="FootstepSound" type="AudioStreamPlayer3D" parent="." unique_id=463038313]
+stream = ExtResource("3_6w4ry")
+max_distance = 25.0
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 

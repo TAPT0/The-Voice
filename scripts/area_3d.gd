@@ -5,7 +5,7 @@ var collected=false
 func interact(user):
 	if collected:
 		return
-	collected=true
+	collected=true 
 	
 	#update the ui
 	if user.has_method("collect_tape"):

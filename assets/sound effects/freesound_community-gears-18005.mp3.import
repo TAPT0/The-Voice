@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://buxdjtynne14g"
+path="res://.godot/imported/freesound_community-gears-18005.mp3-e34971cf74f193e34cf65e8530230c00.mp3str"
+
+[deps]
+
+source_file="res://assets/sound effects/freesound_community-gears-18005.mp3"
+dest_files=["res://.godot/imported/freesound_community-gears-18005.mp3-e34971cf74f193e34cf65e8530230c00.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

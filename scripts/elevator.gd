@@ -12,6 +12,7 @@ func interact(user):
 	if is_moving:
 		return
 	is_moving=true
+	$LiftSound.play()
 	var tween=create_tween()
 	
 	if is_at_top:
@@ -26,3 +27,4 @@ func interact(user):
 func _on_lift_finished():
 	is_moving=false
 	is_at_top=not is_at_top
+	$LiftSound.stop()

@@ -1,5 +1,6 @@
 extends CharacterBody3D
-
+#step sound
+var step_timer=0.0
 #setting
 var WALK_SPEED=3.0
 var RUN_SPEED=6.0
@@ -111,6 +112,16 @@ func _physics_process(delta):
 		#animatioon run
 		if anim_player.current_animation !="mixamo_com":
 			anim_player.play("mixamo_com")
+		#footsetp 
+		step_timer-=delta
+		if step_timer<=0.0:
+			$FootstepSound.pitch_scale=randf_range(0.8,1.2)
+			$FootstepSound.play()
+			
+			if current_speed==RUN_SPEED:
+				step_timer=0.35
+			else:
+				step_timer=0.65
 	else:
 		velocity.z=0.0
 		velocity.z=0.0

@@ -1,5 +1,6 @@
 extends CharacterBody3D
-
+#key 
+var has_key=false
 #pocket
 var tapes_collected=0
 var total_tapes=5
@@ -170,9 +171,22 @@ func _physics_process(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, current_speed)
 		velocity.z = move_toward(velocity.z, 0, current_speed)
-
 	move_and_slide()
-
+	var warden=get_tree().root.find_child("Warden",true,false)
+	if warden:
+		var distance =global_position.distance_to(warden.global_position)
+		if distance <15.0:
+			if not $HeartbeatSound.playing:
+				$HeartbeatSound.play()
+			var intensity=1.0-(distance/15.0)
+			intensity=clamp(intensity,0.0,1.0)
+			$HeartbeatSound.volume_db=lerp(-30.0,0.0,intensity)
+			$HeartbeatSound.pitch_scale=lerp(1.0,1.6,intensity)
+		else:
+			$HeartbeatSound.stop()
+	#death in the void
+	if global_position.y<-15.0:
+		die()
 #hide function
 @warning_ignore("unused_parameter")
 func hide_in_locker(hide_pos,locker_obj):
@@ -213,3 +227,7 @@ func collect_tape():
 	tape_counter.text="Tapes:"+str(tapes_collected)+"/"+str(total_tapes)
 	if tapes_collected>=total_tapes:
 		print("you won")
+#key
+func collect_key():
+	has_key=true
+	print("key collected")

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c627showloqx2"
+path="res://.godot/imported/freesound_community-jp_lockedknob08-42735.mp3-ea3ed7fd19a710de3495b9a12e97a5a7.mp3str"
+
+[deps]
+
+source_file="res://assets/sound effects/freesound_community-jp_lockedknob08-42735.mp3"
+dest_files=["res://.godot/imported/freesound_community-jp_lockedknob08-42735.mp3-ea3ed7fd19a710de3495b9a12e97a5a7.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
