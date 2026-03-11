@@ -1,0 +1,259 @@
+extends CharacterBody3D
+#key 
+var has_key=false
+#pocket
+var tapes_collected=0
+var total_tapes=5
+@onready var tape_counter=$CanvasLayer/TapeCounter
+#death
+var is_dead=false
+@onready var jumpscare_face=$CanvasLayer/JumpscareFace
+#sprint
+var WALK_SPEED=3.0
+var RUN_SPEED=10.0
+#hide systemh
+var is_hidden=false
+var current_locker=null
+
+#panic system
+var warden_node
+const PANIC_DISTANCE=10.0
+var can_hear=false
+#tweaks
+const THRESHOLD_WHISPER=-50.0
+const THRESHOLD_TALK =-30.0
+const THRESHOLD_SCREAM=-10.0
+
+const SPEED = 5.0
+const JUMP_VELOCITY = 4.5
+const MOUSE_SENSITIVITY =0.003
+
+#colors
+const COLOR_EMBER=Color(1.0,0.4,0.0)
+const COLOR_TORCH=Color(1.0,0.9,0.0)
+const COLOR_FLARE=Color(1.0,1.0,1.0)
+
+@onready var camera =$Camera3D
+@onready var chest_light=$Camera3D/OmniLight3D
+
+var gravity =ProjectSettings.get_setting("physics/3d/default_gravity")
+var time_passed=0.0 #flicker
+
+#sanity bar
+var sanity=100.0
+const SANITY_DRAIN_SPEED=10.0
+const SANITY_HEAL_SPEED=20.0
+
+func _ready():
+	Input.mouse_mode=Input.MOUSE_MODE_CAPTURED
+	#look for warden
+	warden_node=get_parent().get_node("Warden")
+	await get_tree().create_timer(1.0).timeout
+	can_hear=true
+	#bar
+	$CanvasLayer/ProgressBar.max_value=100
+	$CanvasLayer/ProgressBar.value=100
+	
+func _input(event):
+	if is_dead:
+		return
+	if event is InputEventMouseMotion:
+		rotate_y(-event.relative.x*MOUSE_SENSITIVITY)
+		camera.rotate_x(-event.relative.y*MOUSE_SENSITIVITY)
+		camera.rotation.x=clamp(camera.rotation.x,deg_to_rad(-90),deg_to_rad(90))
+	#interaction logic
+	if Input.is_action_just_pressed("interact "):
+		#exit 
+		if is_hidden and current_locker !=null:
+			current_locker.interact(self)
+			current_locker=null
+			#enter
+		elif not is_hidden:
+			#raycast to find locker
+			if $Camera3D/RayCast3D.is_colliding():
+				var collider=$Camera3D/RayCast3D.get_collider()
+				if collider.has_method("interact"):
+					collider.interact(self)
+					current_locker=collider
+
+@warning_ignore("unused_parameter")
+func _process(delta):
+	time_passed+=delta
+	if can_hear==false:
+		chest_light.light_energy=0.0
+		return
+	var mic_bus_index=AudioServer.get_bus_index("MicInput")
+	var volume_db=AudioServer.get_bus_peak_volume_left_db(mic_bus_index,0)
+	
+	var target_energy=0.0
+	var target_range=0.0
+	var target_color=Color.BLACK
+	
+	if volume_db> THRESHOLD_SCREAM:
+		target_range=20.0
+		target_color=COLOR_FLARE
+		if int(time_passed*20)%2==0:
+			target_energy=10.0
+		else:
+			target_energy=0.5
+	elif volume_db>THRESHOLD_TALK:
+		target_range=8.0
+		target_color=COLOR_TORCH
+		target_energy=2.0
+		
+	elif volume_db>THRESHOLD_WHISPER:
+		target_range=30.0
+		target_color=COLOR_EMBER
+		target_energy=1.0+(sin(time_passed*10)*0.5)
+	else:
+		target_energy=0.0
+		target_range=0.0
+		target_color=Color.BLACK
+		
+	#sanity logic
+	if target_energy==0.0:
+		sanity-=delta*SANITY_HEAL_SPEED
+	else:
+		sanity+=delta*SANITY_HEAL_SPEED
+		
+	sanity=clamp(sanity,0.0,100.0)
+	
+	$CanvasLayer/ProgressBar.value=sanity
+	
+	#warden
+	if warden_node:
+		var dist_to_warden=global_position.distance_to(warden_node.global_position)
+		
+	#if he is close but we are not holding breath
+		if dist_to_warden<PANIC_DISTANCE:
+			if Input.is_action_just_pressed("hold_breath"):
+				#safe
+				sanity-=delta*10.0
+			else:
+				#panic
+				var panic_flicker=randf_range(0.1,5.0)
+				target_energy=panic_flicker
+				target_color=COLOR_EMBER
+	chest_light.light_energy=lerp(chest_light.light_energy,target_energy,0.1)
+	chest_light.omni_range=lerp(chest_light.omni_range,target_range,0.1)
+	
+	if target_energy>0.1:
+		chest_light.light_color=target_color
+		
+func _physics_process(delta):
+	if is_dead:
+		return
+	#stop gravity if hidden
+	if is_hidden:
+		return
+	# Add the gravity.
+	if not is_on_floor():
+		velocity.y -= gravity * delta
+
+	# Handle jump.
+	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+		velocity.y = JUMP_VELOCITY
+
+	# Get the input direction and handle the movement/deceleration.
+	# As good practice, you should replace UI actions with custom gameplay actions.
+	var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	
+	#sprint
+	var current_speed=WALK_SPEED
+	#shift to run
+	if Input.is_action_pressed("sprint") and not is_hidden:
+		current_speed=RUN_SPEED
+		
+	if direction:
+		velocity.x = direction.x * current_speed
+		velocity.z = direction.z * current_speed
+	else:
+		velocity.x = move_toward(velocity.x, 0, current_speed)
+		velocity.z = move_toward(velocity.z, 0, current_speed)
+	move_and_slide()
+	var warden=get_tree().root.find_child("Warden",true,false)
+	if warden:
+		var distance =global_position.distance_to(warden.global_position)
+		if distance <15.0:
+			if not $HeartbeatSound.playing:
+				$HeartbeatSound.play()
+			var intensity=1.0-(distance/15.0)
+			intensity=clamp(intensity,0.0,1.0)
+			$HeartbeatSound.volume_db=lerp(-30.0,0.0,intensity)
+			$HeartbeatSound.pitch_scale=lerp(1.0,1.6,intensity)
+		else:
+			$HeartbeatSound.stop()
+	#death in the void
+	if global_position.y<-15.0:
+		die()
+#hide function
+@warning_ignore("unused_parameter")
+func hide_in_locker(hide_pos,locker_obj):
+	is_hidden=true
+	
+	#stop moving
+	velocity=Vector3.ZERO
+	#telerport inside the lcoker
+	global_position=hide_pos
+	$CollisionShape3D.disabled=true
+	
+#exit locker function
+func exit_locker(exit_pos):
+	is_hidden=false
+	global_position=exit_pos
+	$CollisionShape3D.disabled=false
+
+func die():
+	is_dead=true
+	#stop movemnent
+	velocity=Vector3.ZERO
+	
+	#flash the scary face
+	jumpscare_face.show()
+	
+	await get_tree().create_timer(1.5).timeout
+	
+	#restart
+	get_tree().reload_current_scene()
+	
+func restart_game():
+	get_tree().reload_current_scene()
+
+#tape
+func collect_tape():
+	tapes_collected+=1
+	#text on screen
+	tape_counter.text="Tapes:"+str(tapes_collected)+"/"+str(total_tapes)
+	if tapes_collected>=total_tapes:
+		trigger_win()
+#key
+func collect_key():
+	has_key=true
+	print("key collected")
+func trigger_jumpscare(monster_head_position):
+	if is_dead:
+		return
+	is_dead=true
+	#stop heartbeat
+	if $HeartbeatSound.playing:
+		$HeartbeatSound.stop()
+		#jumpscare
+		$JumpScareSound.play()
+		#violently snap the camera
+		$Camera3D.look_at(monster_head_position,Vector3.UP)
+		#zoom
+		var tween=create_tween()
+		tween.tween_property($Camera3D,"fov",30.0,0.2).set_trans(Tween.TRANS_BOUNCE)
+		#wait 
+		await get_tree().create_timer(1.5).timeout
+		#gameover
+		$GameOverMenu.visible=true
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+func trigger_win():
+	#show creen
+	$WinScreen.visible=true
+	#unlock mouse
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	#freeze the game
+	get_tree().paused=true

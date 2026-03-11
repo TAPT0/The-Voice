@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cvfjsjnt5r0ra"]
+
+[sub_resource type="Environment" id="Environment_20vo2"]
+background_mode = 1
+ambient_light_source = 1
+
+[node name="Node3D" type="Node3D" unique_id=208566368]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1151470950]
+environment = SubResource("Environment_20vo2")

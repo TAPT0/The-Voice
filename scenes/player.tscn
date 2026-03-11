@@ -1,0 +1,208 @@
+[gd_scene format=3 uid="uid://bfnca7rpcg0rk"]
+
+[ext_resource type="Script" uid="uid://cpn2jkauyjj2l" path="res://scripts/player.gd" id="1_3vyb7"]
+[ext_resource type="Texture2D" uid="uid://chmyhcfbxtwlc" path="res://images/Screenshot 2026-02-20 030650.png" id="2_g2els"]
+[ext_resource type="AudioStream" uid="uid://ixloirg2vej4" path="res://assets/sound effects/freesound_community-heart-beat-6797.mp3" id="3_qhqgy"]
+[ext_resource type="AudioStream" uid="uid://iqty38vo2wjj" path="res://assets/sound effects/freesound_community-jumpscare-94984.mp3" id="4_dqkch"]
+[ext_resource type="Script" uid="uid://bhrsw6ciih5ky" path="res://scripts/game_over_menu.gd" id="5_qlg0r"]
+[ext_resource type="Script" uid="uid://wmdahgrlk720" path="res://scripts/win_screen.gd" id="6_tuyoq"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u8vuu"]
+height = 1.5
+
+[sub_resource type="AudioStreamMicrophone" id="AudioStreamMicrophone_3vyb7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3vyb7"]
+bg_color = Color(0.23537049, 0.23537055, 0.23537043, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g2els"]
+bg_color = Color(0.42911583, 0.06362772, 0.039915457, 1)
+
+[sub_resource type="SystemFont" id="SystemFont_fjrip"]
+subpixel_positioning = 0
+
+[node name="Player" type="CharacterBody3D" unique_id=1082263877]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+script = ExtResource("1_3vyb7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=595170158]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+shape = SubResource("CapsuleShape3D_u8vuu")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1260292679]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.1295118, -0.3546878)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Camera3D" unique_id=1988683298]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.17844522, -0.6445688)
+light_energy = 0.0
+omni_range = 10.0
+
+[node name="RayCast3D" type="RayCast3D" parent="Camera3D" unique_id=1210991669]
+transform = Transform3D(-1, 0, -8.742278e-08, -8.7410356e-08, -0.016859135, 0.9998579, -1.4738724e-09, 0.9998579, 0.016859135, 0, 0, -0.094928384)
+collide_with_areas = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1060601303]
+stream = SubResource("AudioStreamMicrophone_3vyb7")
+autoplay = true
+bus = &"MicInput"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1236617360]
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer" unique_id=113989474]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -643.0
+offset_right = -892.0
+offset_bottom = -616.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_3vyb7")
+theme_override_styles/fill = SubResource("StyleBoxFlat_g2els")
+min_value = 50.0
+value = 50.0
+show_percentage = false
+
+[node name="DeathScreen" type="ColorRect" parent="CanvasLayer" unique_id=1456016883]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+
+[node name="JumpscareFace" type="TextureRect" parent="CanvasLayer" unique_id=60727452]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_g2els")
+expand_mode = 1
+
+[node name="TapeCounter" type="Label" parent="CanvasLayer" unique_id=1381176361]
+offset_left = 27.0
+offset_top = 35.0
+offset_right = 213.0
+offset_bottom = 90.0
+theme_override_font_sizes/font_size = 32
+text = "Tapes:0/5"
+
+[node name="HeartbeatSound" type="AudioStreamPlayer" parent="." unique_id=1165569025]
+stream = ExtResource("3_qhqgy")
+volume_db = -40.0
+
+[node name="JumpScareSound" type="AudioStreamPlayer" parent="." unique_id=2070985875]
+stream = ExtResource("4_dqkch")
+volume_db = 24.0
+
+[node name="GameOverMenu" type="CanvasLayer" parent="." unique_id=1656042387]
+visible = false
+script = ExtResource("5_qlg0r")
+
+[node name="ColorRect" type="ColorRect" parent="GameOverMenu" unique_id=887351836]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="GameOverMenu/ColorRect" unique_id=566194720]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -130.0
+offset_top = 19.0
+offset_right = 130.0
+offset_bottom = 115.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.27058825, 0, 0, 1)
+theme_override_font_sizes/font_size = 70
+text = "Caught!"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOverMenu" unique_id=1908370694]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.5
+offset_top = -33.0
+offset_right = 40.5
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RestartButton" type="Button" parent="GameOverMenu/VBoxContainer" unique_id=2024741002]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.27058825, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "Try Again"
+
+[node name="ExitButton" type="Button" parent="GameOverMenu/VBoxContainer" unique_id=967881145]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.27058825, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "Give Up"
+
+[node name="WinScreen" type="CanvasLayer" parent="." unique_id=1619132446]
+process_mode = 3
+visible = false
+script = ExtResource("6_tuyoq")
+
+[node name="ColorRect" type="ColorRect" parent="WinScreen" unique_id=1960499693]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.023529412, 0, 0.4509804, 0.68235296)
+
+[node name="Label" type="Label" parent="WinScreen" unique_id=368203346]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -57.5
+offset_top = -11.5
+offset_right = 57.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.33337435, 0.020582246, 7.219613e-08, 1)
+theme_override_fonts/font = SubResource("SystemFont_fjrip")
+theme_override_font_sizes/font_size = 60
+text = "YOU SURVIVED"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="WinScreen" unique_id=438884307]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -71.0
+offset_top = 107.0
+offset_right = 71.0
+offset_bottom = 201.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlayAgainButton" type="Button" parent="WinScreen/VBoxContainer" unique_id=575462428]
+layout_mode = 2
+theme_override_font_sizes/font_size = 27
+text = "Play Again"
+
+[node name="QuitButton" type="Button" parent="WinScreen/VBoxContainer" unique_id=1171324694]
+layout_mode = 2
+theme_override_font_sizes/font_size = 27
+text = "Quit"
+
+[connection signal="pressed" from="GameOverMenu/VBoxContainer/RestartButton" to="GameOverMenu" method="_on_restart_button_pressed"]
+[connection signal="pressed" from="GameOverMenu/VBoxContainer/ExitButton" to="GameOverMenu" method="_on_exit_button_pressed"]
+[connection signal="pressed" from="WinScreen/VBoxContainer/PlayAgainButton" to="WinScreen" method="_on_play_again_button_pressed"]
+[connection signal="pressed" from="WinScreen/VBoxContainer/QuitButton" to="WinScreen" method="_on_quit_button_pressed"]

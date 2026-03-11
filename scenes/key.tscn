@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://b64klpnnpu4xa"]
+
+[ext_resource type="Script" uid="uid://buylttx3uy7j5" path="res://scripts/key.gd" id="1_yk2u2"]
+[ext_resource type="AudioStream" uid="uid://cad17bug2wiv7" path="res://assets/sound effects/voicebosch-keys-jingling-199749.mp3" id="2_fttkb"]
+[ext_resource type="PackedScene" uid="uid://ccn3yu3m8xp71" path="res://assets/key/source/SM_Key.fbx" id="3_wy8tx"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_brs3p"]
+radius = 0.10107422
+height = 0.52404785
+
+[node name="Key" type="StaticBody3D" unique_id=1623786780]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.11452776, 0)
+script = ExtResource("1_yk2u2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1865328517]
+transform = Transform3D(1, 0, 0, 0, 0.040236413, 0.9991902, 0, -0.9991902, 0.040236413, 0, 0.037739858, -0.023967393)
+shape = SubResource("CapsuleShape3D_brs3p")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=1469126290]
+stream = ExtResource("2_fttkb")
+
+[node name="SM_Key" parent="." unique_id=2102043566 instance=ExtResource("3_wy8tx")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.004725337, 0.03644395, -0.0701493)
